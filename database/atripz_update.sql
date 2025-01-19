@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 19, 2025 at 06:57 AM
+-- Generation Time: Jan 19, 2025 at 10:04 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `atripz_new_db`
+-- Database: `atripz_update`
 --
 
 -- --------------------------------------------------------
@@ -153,18 +153,6 @@ CREATE TABLE `camp_products` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `carts`
---
-
-CREATE TABLE `carts` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `categories`
 --
 
@@ -189,7 +177,7 @@ INSERT INTO `categories` (`id`, `categories_id`, `category_name`, `parent_catego
 (21, 'z9ulk3V5GQ2m', 'Camping', NULL, NULL, NULL, 'camping', '1', '2024-06-04 01:26:01', '2024-06-04 01:26:01'),
 (23, 'KZhQd1t0uw7U', 'Hiking', NULL, NULL, NULL, 'hiking', '1', '2024-07-02 22:39:35', '2024-07-02 22:39:35'),
 (24, 'RX4yxMHoNfhU', 'Backpack', NULL, NULL, NULL, 'backpack', '1', '2024-07-18 01:49:04', '2024-07-18 01:49:04'),
-(25, 'tT3kHLYAFsu6', 'Tent', NULL, NULL, NULL, 'camping-tent', '1', '2024-07-18 03:22:27', '2024-07-18 03:22:40'),
+(25, 'tT3kHLYAFsu6', 'Tent', NULL, NULL, NULL, 'camping-tent', '1', '2024-07-18 03:22:27', '2025-01-19 02:23:24'),
 (26, 'iIrNV2zaHtPg', 'Clothing', NULL, NULL, NULL, 'clothing', '1', '2024-08-12 02:55:18', '2024-08-12 02:55:18');
 
 -- --------------------------------------------------------
@@ -393,7 +381,8 @@ INSERT INTO `customers` (`id`, `firstName`, `lastName`, `phone`, `email`, `billi
 (108, 'Sumon', '', '01815628620', 'sumonchbd620@gmail.com', 'Chakarir thana rastar matha', '2', '45', '315', '10', 'registerd', '2024-12-30 02:56:07', '2024-12-30 02:56:07'),
 (109, 'ratul', ' ', '01773838326', ' ', 'mirpur, kazipara', NULL, NULL, NULL, '0', 'not registerd', '2025-01-04 01:28:41', '2025-01-04 01:28:41'),
 (110, 'bappu', ' ', '01640481441', ' ', 'konapara', NULL, NULL, NULL, '0', 'not registerd', '2025-01-04 08:09:47', '2025-01-04 08:09:47'),
-(111, 'Fokran Uddin', ' ', '01613141245', ' ', 'Chayani Bazar, Begamganj, Noakhali', NULL, NULL, NULL, '0', 'not registerd', '2025-01-12 06:22:29', '2025-01-12 06:22:29');
+(111, 'Fokran Uddin', ' ', '01613141245', ' ', 'Chayani Bazar, Begamganj, Noakhali', NULL, NULL, NULL, '0', 'not registerd', '2025-01-12 06:22:29', '2025-01-12 06:22:29'),
+(278, 'Amit', 'Roy', '01521428527', 'amitroyrock@gmail.com', 'gopibagh', '3', '1', '457', '10', 'registerd', '2025-01-19 01:16:02', '2025-01-19 01:16:03');
 
 -- --------------------------------------------------------
 
@@ -756,6 +745,7 @@ INSERT INTO `notifications` (`id`, `type`, `notifiable_type`, `notifiable_id`, `
 ('a5d1423b-0696-42c0-b5fd-9f4c6e8ae3d3', 'App\\Notifications\\NewPendingOrderNotification', 'App\\Models\\Order', 369, '{\"message\":\"New Order!\",\"date\":\"2025-01-15T12:41:26.009210Z\",\"order_id\":369,\"order_details\":{\"customer_name\":\"Amit Roy\",\"total_amount\":\"7580\"}}', NULL, '2025-01-15 06:41:26', '2025-01-15 06:41:26'),
 ('aa7e85f4-bf73-439f-a130-bc8bb8875218', 'App\\Notifications\\NewPendingOrderNotification', 'App\\Models\\Order', 371, '{\"message\":\"New Order!\",\"date\":\"2025-01-15T13:05:18.617103Z\",\"order_id\":371,\"order_details\":{\"customer_name\":\"mizan rahman\",\"total_amount\":\"7630\"}}', NULL, '2025-01-15 07:05:18', '2025-01-15 07:05:18'),
 ('ad292519-bd20-4b15-b8a6-805c1e9c4c2b', 'App\\Notifications\\NewPendingOrderNotification', 'App\\Models\\Order', 349, '{\"message\":\"New Order!\",\"date\":\"2025-01-15T11:32:00.602967Z\",\"order_id\":349,\"order_details\":{\"customer_name\":\"Amit Roy\",\"total_amount\":\"22580\"}}', NULL, '2025-01-15 05:32:00', '2025-01-15 05:32:00'),
+('d63de8f2-1956-47ee-ba2f-77cf2ec691f3', 'App\\Notifications\\NewPendingOrderNotification', 'App\\Models\\Order', 376, '{\"message\":\"New Order!\",\"date\":\"2025-01-19T07:16:03.152442Z\",\"order_id\":376,\"order_details\":{\"customer_name\":\"Amit Roy\",\"total_amount\":\"1452\"}}', NULL, '2025-01-19 01:16:03', '2025-01-19 01:16:03'),
 ('e8fc3b5b-968e-4bea-bd9b-1549b3941380', 'App\\Notifications\\NewPendingOrderNotification', 'App\\Models\\Order', 347, '{\"message\":\"New Order!\",\"date\":\"2025-01-15T11:20:27.091820Z\",\"order_id\":347,\"order_details\":{\"customer_name\":\"afrin dgvd\",\"total_amount\":\"7630\"}}', NULL, '2025-01-15 05:20:27', '2025-01-15 05:20:27'),
 ('f73cd2ff-ec24-49b6-950e-3be5a30c9d0b', 'App\\Notifications\\NewPendingOrderNotification', 'App\\Models\\Order', 374, '{\"message\":\"New Order!\",\"date\":\"2025-01-15T13:13:58.916980Z\",\"order_id\":374,\"order_details\":{\"customer_name\":\"mizan rahman\",\"total_amount\":\"7630\"}}', NULL, '2025-01-15 07:13:58', '2025-01-15 07:13:58');
 
@@ -908,7 +898,8 @@ INSERT INTO `orders` (`id`, `invoice_no`, `order_track_id`, `customer_id`, `subt
 (115, '122473', 'K24-2399', 108, 3200.00, 0.00, NULL, 3330.00, 0.00, 0.00, 130.00, 'pending', 0, NULL, NULL, 0, 'only one set.', 0, '2024-12-30 02:56:07', '2025-01-07 03:30:03'),
 (116, '012527', NULL, 109, 13995.00, 1995.00, NULL, 12000.00, 12000.00, 0.00, 0.00, 'completed', 0, 'WalkInCustomer', NULL, 0, 'Pos order', 1, '2025-01-04 01:28:41', '2025-01-04 08:10:24'),
 (117, '012586', NULL, 110, 550.00, 50.00, NULL, 500.00, 0.00, 500.00, 0.00, 'completed', 0, 'WalkInCustomer', NULL, 0, 'Pos order', 1, '2025-01-04 08:09:47', '2025-01-04 08:09:47'),
-(118, '012542', NULL, 111, 550.00, 0.00, NULL, 650.00, 0.00, 650.00, 100.00, 'completed', 0, 'Online', NULL, 0, 'Pos order', 1, '2025-01-12 06:22:29', '2025-01-12 06:22:29');
+(118, '012542', NULL, 111, 550.00, 0.00, NULL, 650.00, 0.00, 650.00, 100.00, 'completed', 0, 'Online', NULL, 0, 'Pos order', 1, '2025-01-12 06:22:29', '2025-01-12 06:22:29'),
+(376, '012551', 'GG25-9180', 278, 1372.00, 0.00, NULL, 1452.00, 0.00, 1452.00, 80.00, 'pending', 0, NULL, NULL, 0, 'no', 0, '2025-01-19 01:16:03', '2025-01-19 01:16:03');
 
 -- --------------------------------------------------------
 
@@ -945,7 +936,8 @@ INSERT INTO `orderstatuses` (`id`, `order_id`, `status`, `confirmed_date_time`, 
 (315, 372, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, '2025-01-15 07:08:16', '2025-01-15 07:08:16'),
 (316, 373, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, '2025-01-15 07:09:34', '2025-01-15 07:09:34'),
 (317, 374, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, '2025-01-15 07:13:58', '2025-01-15 07:13:58'),
-(318, 375, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, '2025-01-15 07:18:59', '2025-01-15 07:18:59');
+(318, 375, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, '2025-01-15 07:18:59', '2025-01-15 07:18:59'),
+(319, 376, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, '2025-01-19 01:16:03', '2025-01-19 01:16:03');
 
 -- --------------------------------------------------------
 
@@ -2645,7 +2637,7 @@ CREATE TABLE `products` (
   `supplier_id` bigint(20) UNSIGNED DEFAULT NULL,
   `raw_price` varchar(255) DEFAULT NULL,
   `regular_price` varchar(255) DEFAULT NULL,
-  `description` longtext NOT NULL,
+  `description` longtext DEFAULT NULL,
   `sku` varchar(255) NOT NULL,
   `stock` varchar(255) DEFAULT NULL,
   `is_sizechart` tinyint(1) DEFAULT 0,
@@ -2704,7 +2696,10 @@ INSERT INTO `products` (`id`, `product_name`, `brand_id`, `category_id`, `suppli
 (114, 'Nautica Inner Thermal Set', 3, 26, 5, '560', '999', '<p>-none-</p>', 'IXHGQ8O3', NULL, 0, 'nautica-inner-thermal-set', 'active', '2024-12-12 04:57:11', '2024-12-12 04:57:11'),
 (115, 'Hi Gear Rock 5 Family Tent 8 Person', 3, 25, 3, '3000', '4999', '<p>This tent can accommodate 8 people. Inside, there are two adjacent rooms where 2 and 3 people can stay, totaling 5 people. The front section can be used for dining, sitting, praying, and storing bikes or bicycles. If needed, an additional 4 to 5 people can stay there. The partitions between the rooms can also be removed to create a large 16x12 feet room. It is suitable for use in school or college tent accommodation programs.</p>', 'T8R12GH4', NULL, 0, 'hi-gear-rock-5-family-tent-8-person', 'active', '2024-12-17 04:15:31', '2024-12-17 04:36:07'),
 (151, 'Color Test', 3, 25, 2, '100', '170', '<p>dfsdf</p>', 'RDVZBSGE', NULL, 0, 'color-test', 'active', '2025-01-15 22:53:50', '2025-01-15 22:53:50'),
-(153, 'Color 4 Test', 3, 21, 2, '270', '270', '<p>assdf gg h h</p>', '513L0DWG', NULL, 0, 'color-4-test', 'active', '2025-01-15 23:07:43', '2025-01-15 23:07:43');
+(153, 'Color 4 Test', 3, 21, 2, '270', '270', '<p>assdf gg h h</p>', '513L0DWG', NULL, 0, 'color-4-test', 'active', '2025-01-15 23:07:43', '2025-01-15 23:07:43'),
+(160, 'test tent', 3, 21, 2, '1500', '1600', NULL, 'D280L3CY', NULL, 0, 'test-tent', 'active', '2025-01-19 01:30:44', '2025-01-19 01:30:44'),
+(161, 'pink color', 4, 23, NULL, NULL, '1200', '<br>', 'H71W0MZ6', NULL, 0, 'pink-color', 'active', '2025-01-19 01:48:41', '2025-01-19 01:48:41'),
+(162, 'test', 3, 23, 2, NULL, '1600', '<p>cd</p>', 'X4D190WC', NULL, 0, 'test', 'active', '2025-01-19 02:03:33', '2025-01-19 02:03:33');
 
 -- --------------------------------------------------------
 
@@ -3056,7 +3051,9 @@ INSERT INTO `product_attributes` (`id`, `product_id`, `name`, `value`, `created_
 (480, 153, 'Color', '30', '2025-01-15 23:07:43', '2025-01-15 23:07:43'),
 (481, 153, 'Size', '40', '2025-01-15 23:07:43', '2025-01-15 23:07:43'),
 (482, 153, 'Color', '31', '2025-01-15 23:07:43', '2025-01-15 23:07:43'),
-(483, 153, 'Size', '41', '2025-01-15 23:07:43', '2025-01-15 23:07:43');
+(483, 153, 'Size', '41', '2025-01-15 23:07:43', '2025-01-15 23:07:43'),
+(498, 162, 'Color', '29', '2025-01-19 02:03:33', '2025-01-19 02:03:33'),
+(499, 162, 'Size', '38', '2025-01-19 02:03:33', '2025-01-19 02:03:33');
 
 -- --------------------------------------------------------
 
@@ -3113,7 +3110,12 @@ INSERT INTO `product_extras` (`id`, `product_id`, `warranty_type`, `return_polic
 (131, 149, NULL, NULL, '1', 'Not Available', '2025-01-14 04:53:33', '2025-01-14 04:53:33'),
 (132, 150, NULL, NULL, '1', 'Not Available', '2025-01-14 05:04:21', '2025-01-14 05:04:21'),
 (133, 151, NULL, NULL, '1', 'Not Available', '2025-01-15 22:53:53', '2025-01-15 22:53:53'),
-(135, 153, NULL, NULL, '1', 'Not Available', '2025-01-15 23:07:43', '2025-01-15 23:07:43');
+(135, 153, NULL, NULL, '1', 'Not Available', '2025-01-15 23:07:43', '2025-01-15 23:07:43'),
+(136, 154, NULL, NULL, '1', 'Available', '2025-01-19 00:32:49', '2025-01-19 00:46:24'),
+(137, 159, NULL, NULL, '1', 'Not Available', '2025-01-19 00:52:01', '2025-01-19 00:52:01'),
+(138, 160, NULL, NULL, '1', 'Not Available', '2025-01-19 01:30:44', '2025-01-19 01:30:44'),
+(139, 161, NULL, NULL, '1', 'Not Available', '2025-01-19 01:48:41', '2025-01-19 01:48:41'),
+(140, 162, NULL, NULL, '1', 'Not Available', '2025-01-19 02:03:33', '2025-01-19 02:03:33');
 
 -- --------------------------------------------------------
 
@@ -3402,7 +3404,12 @@ INSERT INTO `product_images` (`id`, `product_id`, `product_image`, `slug`, `crea
 (462, 114, 'nautica-inner-thermal-set_1.jpg', '', '2024-12-12 04:57:11', '2024-12-12 04:57:11'),
 (463, 115, 'hi-gear-rock-5-family-tent-8-person_0.jpg', '', '2024-12-17 04:15:33', '2024-12-17 04:15:33'),
 (464, 151, 'color-test_0.png', '', '2025-01-15 22:53:53', '2025-01-15 22:53:53'),
-(466, 153, 'color-4-test_0.png', '', '2025-01-15 23:07:43', '2025-01-15 23:07:43');
+(466, 153, 'color-4-test_0.png', '', '2025-01-15 23:07:43', '2025-01-15 23:07:43'),
+(469, 154, 'nature-hike-bagpack_0_1737269233.jpg', '', '2025-01-19 00:47:13', '2025-01-19 00:47:13'),
+(470, 159, 'bag-60l_0.png', '', '2025-01-19 00:52:01', '2025-01-19 00:52:01'),
+(471, 160, 'test-tent_0.jpg', '', '2025-01-19 01:30:44', '2025-01-19 01:30:44'),
+(472, 161, 'pink-color_0.png', '', '2025-01-19 01:48:41', '2025-01-19 01:48:41'),
+(473, 162, 'test_0.png', '', '2025-01-19 02:03:33', '2025-01-19 02:03:33');
 
 -- --------------------------------------------------------
 
@@ -3446,7 +3453,12 @@ INSERT INTO `product_overviews` (`id`, `product_id`, `overview_name`, `overview_
 (183, 149, '76uy6', 'yu', '2025-01-14 04:53:33', '2025-01-14 04:53:33'),
 (184, 150, 'aca', 'ac', '2025-01-14 05:04:21', '2025-01-14 05:04:21'),
 (185, 151, 'Color', 'Check', '2025-01-15 22:53:53', '2025-01-15 22:53:53'),
-(187, 153, 'name', 'color', '2025-01-15 23:07:43', '2025-01-15 23:07:43');
+(187, 153, 'name', 'color', '2025-01-15 23:07:43', '2025-01-15 23:07:43'),
+(188, 154, 'For', '2 Person', '2025-01-19 00:32:49', '2025-01-19 00:32:49'),
+(189, 159, 'cvb', 'fdg', '2025-01-19 00:52:01', '2025-01-19 00:52:01'),
+(190, 160, 'dffgd', 'dvd', '2025-01-19 01:30:44', '2025-01-19 01:30:44'),
+(191, 161, 'sd sd', 'ds sd s dsdsds', '2025-01-19 01:48:41', '2025-01-19 01:48:41'),
+(192, 162, 'dfv', 'dvd', '2025-01-19 02:03:33', '2025-01-19 02:03:33');
 
 -- --------------------------------------------------------
 
@@ -3512,7 +3524,12 @@ INSERT INTO `product_prices` (`id`, `product_id`, `offer_price`, `percentage`, `
 (104, 114, '0', NULL, NULL, '2024-12-12 04:57:11', '2024-12-12 04:57:11'),
 (105, 115, '0', NULL, NULL, '2024-12-17 04:15:33', '2024-12-17 04:15:33'),
 (130, 151, '0', NULL, NULL, '2025-01-15 22:53:53', '2025-01-15 22:53:53'),
-(132, 153, '243', '10', '27', '2025-01-15 23:07:43', '2025-01-15 23:07:43');
+(132, 153, '243', '10', '27', '2025-01-15 23:07:43', '2025-01-15 23:07:43'),
+(133, 154, '0', NULL, NULL, '2025-01-19 00:32:49', '2025-01-19 00:32:49'),
+(134, 159, '686', '2', '14', '2025-01-19 00:52:01', '2025-01-19 00:52:01'),
+(135, 160, '1580', '1.3', '20', '2025-01-19 01:30:44', '2025-01-19 01:30:44'),
+(136, 161, '0', NULL, NULL, '2025-01-19 01:48:41', '2025-01-19 01:48:41'),
+(137, 162, '0', NULL, NULL, '2025-01-19 02:03:33', '2025-01-19 02:03:33');
 
 -- --------------------------------------------------------
 
@@ -3558,7 +3575,10 @@ INSERT INTO `product_tags` (`id`, `product_id`, `tag`, `created_at`, `updated_at
 (203, 151, 'black', '2025-01-15 22:53:53', '2025-01-15 22:53:53'),
 (204, 151, 'pink', '2025-01-15 22:53:53', '2025-01-15 22:53:53'),
 (209, 153, 'test', '2025-01-15 23:07:43', '2025-01-15 23:07:43'),
-(210, 153, 'yellow', '2025-01-15 23:07:43', '2025-01-15 23:07:43');
+(210, 153, 'yellow', '2025-01-15 23:07:43', '2025-01-15 23:07:43'),
+(217, 160, '', '2025-01-19 01:30:44', '2025-01-19 01:30:44'),
+(218, 161, 'bf', '2025-01-19 01:48:41', '2025-01-19 01:48:41'),
+(219, 162, 'jn', '2025-01-19 02:03:33', '2025-01-19 02:03:33');
 
 -- --------------------------------------------------------
 
@@ -3602,7 +3622,9 @@ INSERT INTO `product_variants` (`id`, `product_id`, `price`, `stock`, `created_a
 (322, 151, 170.00, '5', '2025-01-15 22:53:50', '2025-01-15 22:53:50'),
 (328, 153, 270.00, '7', '2025-01-15 23:07:43', '2025-01-15 23:07:43'),
 (329, 153, 270.00, '4', '2025-01-15 23:07:43', '2025-01-15 23:07:43'),
-(330, 153, 270.00, '3', '2025-01-15 23:07:43', '2025-01-15 23:07:43');
+(330, 153, 270.00, '3', '2025-01-15 23:07:43', '2025-01-15 23:07:43'),
+(338, 160, 1600.00, '0', '2025-01-19 01:30:44', '2025-01-19 01:30:44'),
+(339, 162, 2.00, '3', '2025-01-19 02:03:33', '2025-01-19 02:03:33');
 
 -- --------------------------------------------------------
 
@@ -3654,7 +3676,8 @@ INSERT INTO `register_customers` (`id`, `customer_id`, `phone`, `email`, `passwo
 (10, 80, '01914644706', 'kaziscout@gmail.com', '$2y$12$UuFNE2goVdY2x.TZA.uxKueYTHKlVsmGxtQfNzgHnhOzbXN1ABlAi', 'registerd', NULL, '2024-10-28 01:11:11', '2024-10-28 01:11:11'),
 (11, 94, '01643150198', 'ars.kst12345@gmail.com', '$2y$12$/U5Mwno8DIX3gkElp6AzA.7dvnJOeKRECiSUS7TjZRxkyy9XT3DT2', 'registerd', NULL, '2024-12-04 10:28:59', '2024-12-04 10:28:59'),
 (12, 96, '01720208362', 'parvess1980@gmail.com', '$2y$12$VRpTifhhtrw4/aOnksliZeDKqZxoB6qvDmZDPxa5.EGcrqacZ/NPi', 'registerd', NULL, '2024-12-08 08:25:16', '2024-12-08 08:25:16'),
-(13, 108, '01815628620', 'sumonchbd620@gmail.com', '$2y$12$NJbKyxSI/OOFnFm0Um1SEeaqjqzlu8CDUFdqRNV3sMn0Lr/B4mILG', 'registerd', NULL, '2024-12-30 02:56:07', '2024-12-30 02:56:07');
+(13, 108, '01815628620', 'sumonchbd620@gmail.com', '$2y$12$NJbKyxSI/OOFnFm0Um1SEeaqjqzlu8CDUFdqRNV3sMn0Lr/B4mILG', 'registerd', NULL, '2024-12-30 02:56:07', '2024-12-30 02:56:07'),
+(227, 278, '01521428527', 'amitroyrock@gmail.com', '$2y$12$x0sSLEHtGOtKyvkK.aKfbeijw7vbMGb9qyU59ufdwWtnjgmCJ7dW2', 'registerd', NULL, '2025-01-19 01:16:03', '2025-01-19 01:16:03');
 
 -- --------------------------------------------------------
 
@@ -3793,7 +3816,8 @@ INSERT INTO `shippings` (`id`, `customer_id`, `order_id`, `first_name`, `last_na
 (151, 274, 370, 'mizan', 'rahman', '01521422807', 'mizan@mail.com', 'dhaka', '3', '1', 452, '2025-01-15 07:00:23', '2025-01-15 07:00:23'),
 (152, 275, 371, 'mizan', 'rahman', '01511111111', 'mizan@test.com', 'dhaka', '1', '34', 1, '2025-01-15 07:05:18', '2025-01-15 07:05:18'),
 (153, 276, 372, 'mizan', 'rahman', '01511111112', 'mizan@test1.com', 'dhaka', '1', '34', 1, '2025-01-15 07:08:16', '2025-01-15 07:08:16'),
-(154, 277, 375, 'mizanurrahman', 'rahman', '01982729327', 'mizanurrahman5298@gmail.com', 'pabna', '3', '1', 452, '2025-01-15 07:18:59', '2025-01-15 07:18:59');
+(154, 277, 375, 'mizanurrahman', 'rahman', '01982729327', 'mizanurrahman5298@gmail.com', 'pabna', '3', '1', 452, '2025-01-15 07:18:59', '2025-01-15 07:18:59'),
+(155, 278, 376, 'Amit', 'Roy', '01521428527', 'amitroyrock@gmail.com', 'gopibagh', '3', '1', 457, '2025-01-19 01:16:03', '2025-01-19 01:16:03');
 
 -- --------------------------------------------------------
 
@@ -3814,7 +3838,7 @@ CREATE TABLE `shoppingcart` (
 --
 
 INSERT INTO `shoppingcart` (`identifier`, `instance`, `content`, `created_at`, `updated_at`) VALUES
-('amitroyrock@gmail.com', 'wishlist', 'O:29:\"Illuminate\\Support\\Collection\":2:{s:8:\"\0*\0items\";a:0:{}s:28:\"\0*\0escapeWhenCastingToString\";b:0;}', '2025-01-14 07:28:48', NULL),
+('amitroyrock@gmail.com', 'wishlist', 'O:29:\"Illuminate\\Support\\Collection\":2:{s:8:\"\0*\0items\";a:0:{}s:28:\"\0*\0escapeWhenCastingToString\";b:0;}', '2025-01-19 02:41:50', NULL),
 ('mizan@test.com', 'wishlist', 'O:29:\"Illuminate\\Support\\Collection\":2:{s:8:\"\0*\0items\";a:0:{}s:28:\"\0*\0escapeWhenCastingToString\";b:0;}', '2025-01-15 07:14:13', NULL);
 
 -- --------------------------------------------------------
@@ -4078,7 +4102,8 @@ INSERT INTO `transactions` (`id`, `customer_id`, `order_id`, `mode`, `transactio
 (96, 108, 115, 'cash', NULL, 'paid', '2024-12-30 02:56:07', '2025-01-07 03:30:03'),
 (97, 109, 116, 'cash', NULL, 'paid', '2025-01-04 01:28:41', '2025-01-04 08:10:24'),
 (98, 110, 117, 'cash', NULL, 'unpaid', '2025-01-04 08:09:47', '2025-01-04 08:09:47'),
-(99, 111, 118, 'cash', NULL, 'unpaid', '2025-01-12 06:22:29', '2025-01-12 06:22:29');
+(99, 111, 118, 'cash', NULL, 'unpaid', '2025-01-12 06:22:29', '2025-01-12 06:22:29'),
+(252, 278, 376, 'cod', NULL, 'unpaid', '2025-01-19 01:16:03', '2025-01-19 01:16:03');
 
 -- --------------------------------------------------------
 
@@ -4684,7 +4709,9 @@ INSERT INTO `variant_attributes` (`id`, `variant_id`, `attribute_id`, `created_a
 (494, 329, 480, '2025-01-15 23:07:43', '2025-01-15 23:07:43'),
 (495, 329, 481, '2025-01-15 23:07:43', '2025-01-15 23:07:43'),
 (496, 330, 482, '2025-01-15 23:07:43', '2025-01-15 23:07:43'),
-(497, 330, 483, '2025-01-15 23:07:43', '2025-01-15 23:07:43');
+(497, 330, 483, '2025-01-15 23:07:43', '2025-01-15 23:07:43'),
+(512, 339, 498, '2025-01-19 02:03:33', '2025-01-19 02:03:33'),
+(513, 339, 499, '2025-01-19 02:03:33', '2025-01-19 02:03:33');
 
 -- --------------------------------------------------------
 
@@ -4740,7 +4767,7 @@ CREATE TABLE `web_infos` (
 --
 
 INSERT INTO `web_infos` (`id`, `appName`, `description`, `weblogo`, `footerlogo`, `webfavicon`, `marquee`, `copyright`, `entitle`, `created_at`, `updated_at`) VALUES
-(1, 'ATRIPZ', 'ATRIPZ', '1736919206.png', 'footer_1736921698.png', '1736940922.png', NULL, '2024 © All rights reserved by ATRIPZ', NULL, '2024-05-05 05:14:15', '2025-01-15 05:35:25');
+(1, 'ATRIPZ', 'ATRIPZ', '1736919206.png', 'footer_1736921698.png', '1736940922.png', 'Welcome to Our WebSite ATripZ', '2024 © All rights reserved by ATRIPZ', 'Your ultimate Lifestyle.', '2024-05-05 05:14:15', '2025-01-19 02:40:29');
 
 --
 -- Indexes for dumped tables
@@ -4787,12 +4814,6 @@ ALTER TABLE `camp_products`
   ADD PRIMARY KEY (`id`),
   ADD KEY `camp_products_campaign_id_foreign` (`campaign_id`),
   ADD KEY `camp_products_product_id_foreign` (`product_id`);
-
---
--- Indexes for table `carts`
---
-ALTER TABLE `carts`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `categories`
@@ -5305,16 +5326,10 @@ ALTER TABLE `camp_products`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `carts`
---
-ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `category_size_headers`
@@ -5344,7 +5359,7 @@ ALTER TABLE `coupons`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=278;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=279;
 
 --
 -- AUTO_INCREMENT for table `delivery_zones`
@@ -5410,19 +5425,19 @@ ALTER TABLE `offer_types`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=376;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=377;
 
 --
 -- AUTO_INCREMENT for table `orderstatuses`
 --
 ALTER TABLE `orderstatuses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=319;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=320;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=206;
 
 --
 -- AUTO_INCREMENT for table `password_resets`
@@ -5458,7 +5473,7 @@ ALTER TABLE `postcodes`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 
 --
 -- AUTO_INCREMENT for table `products_colors`
@@ -5482,25 +5497,25 @@ ALTER TABLE `product_additionalinfos`
 -- AUTO_INCREMENT for table `product_attributes`
 --
 ALTER TABLE `product_attributes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=484;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=500;
 
 --
 -- AUTO_INCREMENT for table `product_color_images`
 --
 ALTER TABLE `product_color_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `product_extras`
 --
 ALTER TABLE `product_extras`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
 
 --
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=467;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=474;
 
 --
 -- AUTO_INCREMENT for table `product_image_with_colors`
@@ -5512,13 +5527,13 @@ ALTER TABLE `product_image_with_colors`
 -- AUTO_INCREMENT for table `product_overviews`
 --
 ALTER TABLE `product_overviews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
 
 --
 -- AUTO_INCREMENT for table `product_prices`
 --
 ALTER TABLE `product_prices`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
 
 --
 -- AUTO_INCREMENT for table `product_stocks`
@@ -5530,7 +5545,7 @@ ALTER TABLE `product_stocks`
 -- AUTO_INCREMENT for table `product_tags`
 --
 ALTER TABLE `product_tags`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=220;
 
 --
 -- AUTO_INCREMENT for table `product_thumbnails`
@@ -5542,7 +5557,7 @@ ALTER TABLE `product_thumbnails`
 -- AUTO_INCREMENT for table `product_variants`
 --
 ALTER TABLE `product_variants`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=331;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=340;
 
 --
 -- AUTO_INCREMENT for table `purchases`
@@ -5554,7 +5569,7 @@ ALTER TABLE `purchases`
 -- AUTO_INCREMENT for table `register_customers`
 --
 ALTER TABLE `register_customers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=227;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=228;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -5578,7 +5593,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `shippings`
 --
 ALTER TABLE `shippings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
 
 --
 -- AUTO_INCREMENT for table `sizes`
@@ -5626,7 +5641,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=253;
 
 --
 -- AUTO_INCREMENT for table `upazillas`
@@ -5650,7 +5665,7 @@ ALTER TABLE `user_profiles`
 -- AUTO_INCREMENT for table `variant_attributes`
 --
 ALTER TABLE `variant_attributes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=498;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=514;
 
 --
 -- AUTO_INCREMENT for table `varients`
