@@ -37,6 +37,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Admin\CampaignController;
+use App\Http\Controllers\Admin\CancellationReturnController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\SettingsController;
@@ -53,6 +54,7 @@ use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Admin\DeliveryInfoController;
+use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\SpecificationController;
 use App\Http\Controllers\Frontend\TrackorderController;
 use App\Http\Controllers\Admin\TermsConditionController;
@@ -62,6 +64,11 @@ use App\Http\Controllers\Frontend\CustomerAuthController;
 use App\Http\Controllers\Frontend\ForgotPasswordController;
 use App\Http\Controllers\Frontend\CustomerDashboardController;
 use App\Livewire\FilterComponent;
+use App\Models\CancellationReturn;
+use App\Models\DeliveryInfo;
+use App\Models\Faq;
+use App\Models\PrivacyPolicy;
+use App\Models\TermsCondition;
 
 /*
 |--------------------------------------------------------------------------
@@ -128,25 +135,31 @@ Route::get('/dashboard/404', function () {
 
 Route::get('/privacy_and_policy', function () {
     $categories = Category::with('children')->whereNull('parent_category')->get();
-    return view('frontend.privacy-policy',compact('categories'));
+    $privacyPolicy = PrivacyPolicy::first();
+    return view('frontend.privacy-policy',compact('categories','privacyPolicy'));
 });
 
 Route::get('/terms-and-condition', function () {
     $categories = Category::with('children')->whereNull('parent_category')->get();
-    return view('frontend.terms-and-condition',compact('categories'));
+    $termsCondition = TermsCondition::first();
+
+    return view('frontend.terms-and-condition',compact('categories','termsCondition'));
 });
 
 Route::get('/cancellation_and_return', function () {
     $categories = Category::with('children')->whereNull('parent_category')->get();
-    return view('frontend.cancellation_and_return',compact('categories'));
+    $cancelReturn = CancellationReturn::first();
+    return view('frontend.cancellation_and_return',compact('categories','cancelReturn'));
 });
 Route::get('/delivery_information', function () {
     $categories = Category::with('children')->whereNull('parent_category')->get();
-    return view('frontend.delivery_information',compact('categories'));
+    $deliveryInformation = DeliveryInfo::first();
+    return view('frontend.delivery_information',compact('categories','deliveryInformation'));
 });
 Route::get('/faq_information', function () {
     $categories = Category::with('children')->whereNull('parent_category')->get();
-    return view('frontend.faq',compact('categories'));
+    $faq = Faq::first();
+    return view('frontend.faq',compact('categories','faq'));
 });
 
 // Route::get('/', HomeComponent::class )->name('home');
@@ -590,6 +603,16 @@ Route::post('reset-password-post', [ForgotPasswordController::class, 'submitRese
         Route::get('/dashboard/delivery_info', 'index')->name('delivery_info.index');
         Route::post('/dashboard/delivery_info/update', 'update')->name('delivery_info.update');
     });
+     // Faqs
+    Route::controller(FaqController::class)->group(function(){
+        Route::get('/dashboard/faq', 'index')->name('faq.index');
+        Route::post('/dashboard/faq/update', 'update')->name('faq.update');
+    });
+     //Cancellation and return policy
+    Route::controller(CancellationReturnController::class)->group(function(){
+        Route::get('/cancel-return-policy/faq', 'index')->name('cancel-return-policy.index');
+        Route::post('/dashboard/cancel-return-policy/update', 'update')->name('cancel-return-policy.update');
+    });
 
      // Privacy Policy
      Route::controller(PrivacyController::class)->group(function(){
@@ -599,8 +622,8 @@ Route::post('reset-password-post', [ForgotPasswordController::class, 'submitRese
 
      // terms and Condition
     Route::controller(TermsConditionController::class)->group(function(){
-        Route::get('/dashboard/terms_conditioin','index')->name('terms_conditioin.index');
-        Route::post('/dashboard/terms_conditioin/update', 'update')->name('terms_conditioin.update');
+        Route::get('/dashboard/terms_condition','index')->name('terms_condition.index');
+        Route::post('/dashboard/terms_condition/update', 'update')->name('terms_condition.update');
     });
 
     //sizechart

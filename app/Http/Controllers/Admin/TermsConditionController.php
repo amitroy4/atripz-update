@@ -9,8 +9,8 @@ use App\Http\Controllers\Controller;
 class TermsConditionController extends Controller
 {
     public function index(){
-        $terms_conditioin = TermsCondition::first();
-        return view('admin.terms_conditioin.index',compact('terms_conditioin'));
+        $terms_condition = TermsCondition::first();
+        return view('admin.terms_condition.index',compact('terms_condition'));
     }
     public function update(Request $request){
         $request->validate([
@@ -18,18 +18,18 @@ class TermsConditionController extends Controller
             'description' => 'required'
         ]);
 
-        $terms_conditioin = TermsCondition::first();
-        if ($terms_conditioin == null) {
+        $terms_condition = TermsCondition::first();
+        if ($terms_condition == null) {
             TermsCondition::create([
                 'title' => $request->title,
                 'description' => $request->description
             ]);
         } else {
-            $terms_conditioin->update([
+            $terms_condition->update([
                 'title'=>$request->title,
                 'description'=>$request->description
             ]);
         }
-        return redirect()->route('terms_conditioin.index')->with('success','Terms and condition updated successfully');
+        return redirect()->route('terms_condition.index')->with('success','Terms and condition updated successfully');
     }
 }
