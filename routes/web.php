@@ -275,6 +275,11 @@ Route::post('reset-password-post', [ForgotPasswordController::class, 'submitRese
         Route::get('/dashboard/varient/size_edit', 'size_edit')->middleware(['permission:update variant'])->name('size.edit');
         Route::post('/dashboard/varient/size_update', 'size_update')->middleware(['permission:update variant'])->name('size.update');
         Route::delete('/dashboard/varient/size_destroy/{id}', 'size_destroy')->middleware(['permission:delete variant '])->name('size.destroy');
+        // COlor
+        Route::post('/dashboard/varient/unit_store', 'unit_store')->middleware(['permission:create variant'])->name('unit.store');
+        Route::get('/dashboard/varient/unit_edit', 'unit_edit')->middleware(['permission:update variant'])->name('unit.edit');
+        Route::post('/dashboard/varient/unit_update', 'unit_update')->middleware(['permission:update variant'])->name('unit.update');
+        Route::delete('/dashboard/varient/unit_destroy/{id}', 'unit_destroy')->middleware(['permission:delete variant '])->name('unit.destroy');
 
     });
 

@@ -92,6 +92,10 @@ class Products extends Model
     {
         return $this->belongsToMany(Size::class, 'products_sizes', 'product_id', 'size_id');
     }
+    public function units()
+    {
+        return $this->belongsToMany(Unit::class, 'products_units', 'product_id', 'unit_id');
+    }
 
     public function colors()
     {

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Size;
+use App\Models\Unit;
 use App\Models\Color;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Models\Size;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,7 +22,8 @@ class VarientController extends Controller
 
         $colors = Color::all();
         $sizes = Size::all();
-        return view('admin.products.varient.index',compact('colors','sizes'));
+        $units = Unit::all();
+        return view('admin.products.varient.index',compact('colors','sizes','units'));
     }
 
     /**
@@ -117,6 +119,47 @@ class VarientController extends Controller
             }
         return redirect()->back();
     }
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function unit_store(Request $request)
+    {
+        $rules = [
+            'unit_name' => ['required', Rule::unique('units', 'unit_name')],
+            'unit_value' => 'required',
+        ];
+
+        $customMessages = [
+            'unit_name.required' => 'The unit name field is required.',
+            'unit_name.unique' => 'The unit name already exists.',
+            'unit_value.required' => 'The unit field is required.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $customMessages);
+
+        // Validate the request
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // If validation passes, proceed to insert data into the database.
+        $units = new Unit;
+        $units->unit_name = $request->unit_name;
+        $units->unit = $request->unit_value;
+        $units->status = $request->status ? 1 : 0;
+
+            // Save only if unit _name is unique
+            $existingUnit = Unit::where('unit_name', $units->units_name)->first();
+            if (!$existingUnit) {
+                $units->save();
+                // Set success message in session
+                Session::flash('success', 'unit added successfully.');
+            } else {
+                // Set error message in session
+                Session::flash('danger', 'The unit name already exists.');
+            }
+        return redirect()->back();
+    }
 
     /**
      * Display the specified resource.
@@ -143,6 +186,15 @@ class VarientController extends Controller
         $size = Size::findOrFail($id);
 
         return response()->json($size);
+    }
+    public function unit_edit(Request $request)
+    {
+
+        // dd($request->id);
+        $id = $request->id;
+        $unit = Unit::findOrFail($id);
+
+        return response()->json($unit);
     }
 
     /**
@@ -177,7 +229,7 @@ class VarientController extends Controller
                 'status' => $request->status ? 1 : 0,
             ]);
             Session::flash('success', 'Color updated successfully!');
-            
+
             return response()->json(['status' => 200]);
             // return redirect()->back()->with('success', 'Color updated successfully.');
         }
@@ -214,8 +266,45 @@ class VarientController extends Controller
                 'size' => $request->size_value,
                 'status' => $request->status ? 1 : 0,
             ]);
-            
+
             Session::flash('success', 'Size updated successfully!');
+
+            return response()->json(['status' => 200]);
+            // return redirect()->back()->with('success', 'Color updated successfully.');
+        }
+
+    }
+    /**
+     * Update the specified resource in storage.
+     */
+    public function unit_update(Request $request)
+    {
+        $id = $request->unit_id;
+        $rules = [
+            'unit_name' => 'required',
+            'unit_value' => 'required',
+        ];
+
+        $customMessages = [
+            'unit_name.required' => 'The unit name field is required.',
+            'unit_value.required' => 'The unit field is required.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $customMessages);
+
+        // Validate the request
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        else{
+            $unit = Unit::find($id);
+            $unit->update([
+                'unit_name' => $request->unit_name,
+                'unit' => $request->unit_value,
+                'status' => $request->status ? 1 : 0,
+            ]);
+
+            Session::flash('success', 'unit updated successfully!');
 
             return response()->json(['status' => 200]);
             // return redirect()->back()->with('success', 'Color updated successfully.');
@@ -255,6 +344,23 @@ class VarientController extends Controller
         } catch (\Exception $e) {
             // Log the exception or handle it in a way that makes sense for your application
             return redirect()->route('varient.index')->with('error', 'Error deleting color.');
+        }
+    }
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function unit_destroy(string $id)
+    {
+        // dd($id);
+        try {
+            $unit = Unit::findOrFail($id);
+
+            $unit->delete();
+
+            return redirect()->route('varient.index')->with('danger', 'Unit deleted successfully.');
+        } catch (\Exception $e) {
+            // Log the exception or handle it in a way that makes sense for your application
+            return redirect()->route('varient.index')->with('error', 'Error deleting Unit.');
         }
     }
 }

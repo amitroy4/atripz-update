@@ -19,7 +19,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-6 col-md-6">
+    <div class="col-lg-4 col-md-4">
 
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between">
@@ -88,7 +88,7 @@
             </div> <!-- card-body end// -->
         </div> <!-- card end// -->
     </div>
-    <div class="col-lg-6 col-md-6">
+    <div class="col-lg-4 col-md-4">
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between">
                 <h4>Size</h4>
@@ -143,13 +143,70 @@
             </div> <!-- card-body end// -->
         </div> <!-- card end// -->
     </div>
+    <div class="col-lg-4 col-md-4">
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between">
+                <h4>Unit</h4>
+                @can('create variant')
+                <button type="button" class="btn btn-primary btn-sm rounded" data-bs-toggle="modal" data-bs-target="#unitModal">
+                    Add Unit
+                </button>
+                @endcan
+            </div>
+            <div class="card-body">
+                <table class="table table-border" id="unitTable" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>#SN</th>
+                            <th>Unit Name</th>
+                            <th>Unit</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($units as $key => $unit)
+                        <tr>
+                            <td>{{$key+1}}</td>
+                            <td>{{$unit->unit_name}}</td>
+                            <td>{{$unit->unit}}</td>
+                            <td>
+                                @if ($unit->status == 1)
+                                <span class="badge rounded-pill alert-success">Published</span>
+                                @else
+                                <span class="badge rounded-pill alert-danger">Not Published</span>
+                                @endif
+                            </td>
+                            <td>
+                                @can('update variant')
+                                <a href="#" class="btn btn-sm font-sm rounded btn-brand mb-2 unit-edit" data-bs-toggle="modal" data-bs-target="#unitModalEdit" data-unit-id="{{ $unit->id }}">
+                                    <i class="material-icons md-edit"></i> Edit
+                                </a>
+                                @endcan
+                                @can('delete variant')
+                                <a href="{{route('unit.destroy',$unit->id)}}" class="btn btn-sm font-sm btn-light rounded mb-2" onclick="confirmDelete(event)">
+                                    <i class="material-icons md-delete_forever"></i> Delete
+                                </a>
+                                @endcan
+                            </td>
+
+                        </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
+            </div> <!-- card-body end// -->
+        </div> <!-- card end// -->
+    </div>
 
 </div>
 @include('admin.products.varient.colors_edit')
 @include('admin.products.varient.size_edit')
+@include('admin.products.varient.unit_edit')
 
 @include('admin.products.varient.colors')
 @include('admin.products.varient.size')
+@include('admin.products.varient.unit')
 
 @endsection
 @push('varient')
@@ -163,6 +220,10 @@
         } )
 
         $('#sizeTable').DataTable( {
+            pageLength : 5,
+            lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']]
+        } )
+        $('#unitTable').DataTable( {
             pageLength : 5,
             lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']]
         } )
@@ -265,6 +326,64 @@
                     if (res.status == 200) {
                         // alert('ok');
                         $("#sizeModalEdit").modal('hide');
+                        location.reload();
+                        // $.Notification.autoHideNotify('success', 'top right', 'Success', res.message);
+                    }
+                    else{
+                        $.Notification.autoHideNotify('danger', 'top right', 'Danger', res.message);
+
+                    }
+                }
+            })
+        });
+
+        //Unit Edit
+        $(document).on('click', '.unit-edit', function (e) {
+            e.preventDefault();
+            var unitId = $(this).data('unit-id');
+            // console.log(unitId);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: '/dashboard/varient/unit_edit',
+                method: 'GET',
+                data: {
+                    id: unitId,
+                },
+                success: function (response) {
+
+                    console.log(response);
+
+                    $('#unit_id').val(response.id);
+                    $('#unit_name').val(response.unit_name);
+                    $('#unit_value').val(response.unit);
+                    $('#status_unit').prop('checked', response.status == 1);
+                    // $("#edit_modal_form").modal('show');
+                    // console.log(response)
+                }
+            });
+        });
+
+        //Update unit
+        $("#unitEditForm").submit(function (e) {
+            e.preventDefault();
+            const data = new FormData(this);
+            console.log(data);
+            $.ajax({
+                url: '/dashboard/varient/unit_update',
+                method: 'post',
+                data: data,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (res) {
+                    if (res.status == 200) {
+                        // alert('ok');
+                        $("#unitModalEdit").modal('hide');
                         location.reload();
                         // $.Notification.autoHideNotify('success', 'top right', 'Success', res.message);
                     }

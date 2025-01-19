@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Intervention\Image\ImageManager;
 use App\Models\Product_additionalinfo;
+use App\Models\Unit;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -65,6 +66,7 @@ class ProductController extends Controller
             'product_extras',
             'tags',
             'sizes',
+            'units',
             'colors',
             'brand',
             'category',
@@ -161,6 +163,7 @@ class ProductController extends Controller
         $subcategories = Subcategory::all();
         $colors = Color::all();
         $sizes = Size::all();
+        $units = Unit::all();
         $suppliers = Supplier::all();
         return view('admin.products.create',[
             'brands' => $brands,
@@ -168,6 +171,7 @@ class ProductController extends Controller
             'subcategories' => $subcategories,
             'colors' =>$colors,
             'sizes' =>$sizes,
+            'units' =>$units,
             'suppliers'=> $suppliers
             ]);
     }
@@ -177,6 +181,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
+        // dd($request->all());
         $rules = [
             'product_name' => 'required|string',
             'product_brand' => 'required|exists:brands,id',
@@ -206,8 +212,9 @@ class ProductController extends Controller
 
             'variant_color.*' => 'nullable|exists:colors,id',
             'variant_size.*' => 'nullable|exists:sizes,id',
+            'variant_unit.*' => 'nullable|exists:units,id',
             'variant_price.*' => 'nullable|numeric',
-            'variant_stock.*' => 'required|numeric',
+            'variant_stock.*' => 'nullable|numeric',
         ];
 
 
@@ -241,22 +248,22 @@ class ProductController extends Controller
 
                         $colors = $request->variant_color;
                         $sizes = $request->variant_size;
-                        $prices = $request->variant_price;
-                        $stocks = $request->variant_stock;
+                        $units = $request->variant_unit;
 
-                        foreach ($stocks as $index => $stock) {
+
+                        foreach ($colors as $index => $color) {
 
                             $variant = new ProductVariant;
                             $variant->product_id = $product->id;
-                            $variant->price = $prices[$index];
-                            $variant->stock = $stock;
+                            $variant->price = 0;
+                            $variant->stock = 0;
                             $variant->save();
 
-                            if (isset($colors[$index])) {
+                            if (isset($color)) {
                                 $colorAttribute = ProductAttribute::create([
                                     'product_id' => $product->id,
                                     'name' => 'Color',
-                                    'value' => $colors[$index],
+                                    'value' => $color,
                                 ]);
                                 VariantAttribute::create([
                                     'variant_id' => $variant->id,
@@ -273,6 +280,17 @@ class ProductController extends Controller
                                 VariantAttribute::create([
                                     'variant_id' => $variant->id,
                                     'attribute_id' => $sizeAttribute->id,
+                                ]);
+                            }
+                            if (isset($units[$index])) {
+                                $unitAttribute = ProductAttribute::create([
+                                    'product_id' => $product->id,
+                                    'name' => 'Unit',
+                                    'value' => $units[$index],
+                                ]);
+                                VariantAttribute::create([
+                                    'variant_id' => $variant->id,
+                                    'attribute_id' => $unitAttribute->id,
                                 ]);
                             }
                         }
@@ -445,6 +463,7 @@ class ProductController extends Controller
             'product_extras',
             'tags',
             'sizes',
+            'units',
             'colors',
             'brand',
             'category',
@@ -463,6 +482,7 @@ class ProductController extends Controller
         $subcategories = Subcategory::all();
         $colors = Color::all();
         $sizes = Size::all();
+        $units = Unit::all();
         $suppliers = Supplier::all();
 
         $products = Products::with([
@@ -472,6 +492,7 @@ class ProductController extends Controller
             'product_extras',
             'tags',
             'sizes',
+            'units',
             'colors',
             'brand',
             'category',
@@ -485,7 +506,7 @@ class ProductController extends Controller
             // dd($hasVariants);
         }
 
-        return view('admin.products.edit',compact('products','brands','categories','subcategories','colors','suppliers','sizes'));
+        return view('admin.products.edit',compact('products','brands','categories','subcategories','colors','suppliers','sizes','units'));
     }
 
     /**
@@ -522,6 +543,7 @@ class ProductController extends Controller
 
             'variant_color.*' => 'nullable|exists:colors,id',
             'variant_size.*' => 'nullable|exists:sizes,id',
+            'variant_unit.*' => 'nullable|exists:units,id',
             'variant_price.*' => 'nullable|numeric',
             'variant_stock.*' => 'required|numeric',
         ];
@@ -553,6 +575,7 @@ class ProductController extends Controller
             $variantIds = $request->input('variant_ids', []);
             $variantColors = $request->input('variant_color', []);
             $variantSizes = $request->input('variant_size', []);
+            $variantUnits = $request->input('variant_unit', []);
             $variantPrices = $request->input('variant_price', []);
             $variantStocks = $request->input('variant_stock', []);
 
@@ -592,6 +615,18 @@ class ProductController extends Controller
                             VariantAttribute::create(['variant_id' => $variant->id, 'attribute_id' => $sizeAttr->id]);
                         }
                     }
+                    if (isset($variantUnits[$index])) {
+                        $unitAttribute = $variant->attributes()->whereHas('attribute', function($query) {
+                            $query->where('name', 'Unit');
+                        })->first();
+
+                        if ($unitAttribute) {
+                            $unitAttribute->attribute->update(['value' => $variantUnits[$index]]);
+                        } else {
+                            $unitAttr = ProductAttribute::create(['product_id' => $product->id, 'name' => 'Unit', 'value' => $variantUnits[$index]]);
+                            VariantAttribute::create(['variant_id' => $variant->id, 'attribute_id' => $unitAttr->id]);
+                        }
+                    }
                 }
             }
 
@@ -599,22 +634,23 @@ class ProductController extends Controller
 
                 $colors = $request->new_variant_color;
                 $sizes = $request->new_variant_size;
-                $prices = $request->new_variant_price;
-                $stocks = $request->new_variant_stock;
+                $units = $request->new_variant_unit;
+                // $prices = $request->new_variant_price;
+                // $stocks = $request->new_variant_stock;
 
-                foreach ($stocks as $index => $stock) {
+                foreach ($colors as $index => $color) {
 
                     $variant = new ProductVariant;
                     $variant->product_id = $product->id;
-                    $variant->price = $prices[$index];
-                    $variant->stock = $stock;
+                    $variant->price = 0;
+                    $variant->stock = 0;
                     $variant->save();
 
-                    if (isset($colors[$index])) {
+                    if (isset($color)) {
                         $colorAttribute = ProductAttribute::create([
                             'product_id' => $product->id,
                             'name' => 'Color',
-                            'value' => $colors[$index],
+                            'value' => $color,
                         ]);
                         VariantAttribute::create([
                             'variant_id' => $variant->id,
@@ -631,6 +667,17 @@ class ProductController extends Controller
                         VariantAttribute::create([
                             'variant_id' => $variant->id,
                             'attribute_id' => $sizeAttribute->id,
+                        ]);
+                    }
+                    if (isset($units[$index])) {
+                        $unitAttribute = ProductAttribute::create([
+                            'product_id' => $product->id,
+                            'name' => 'Unit',
+                            'value' => $units[$index],
+                        ]);
+                        VariantAttribute::create([
+                            'variant_id' => $variant->id,
+                            'attribute_id' => $unitAttribute->id,
                         ]);
                     }
                 }

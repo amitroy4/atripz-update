@@ -13,13 +13,17 @@
                     <input type="hidden" name="product_id" id="product_id">
                     <input type="hidden" name="old_stock" id="old_stock">
                     <div class="row g-3">
-                        <div class="col-md-12 mb-2">
+                        <div class="col-md-8 mb-2">
                             <label for="product_name" class="form-label">Product</label>
                             <input type="text" class="form-control" id="product_name" name="product_name"
                                 placeholder="Product" readonly>
                         </div>
+                        <div class="col-md-4 mb-2">
+                            <label for="purchase_date" class="form-label">Purchase Date</label>
+                            <input type="date" class="form-control " id="purchase_date" name="purchase_date">
+                        </div>
 
-                        <div class="col-md-12 mb-2">
+                        <div class="col-md-4 mb-2">
                             <label for="supplier" class="form-label">Supplier</label>
                             <select class="form-control" id="supplier" name="supplier">
                                 <option value="">-- Select Supplier --</option>
@@ -30,20 +34,17 @@
                             {{-- <input type="text" class="form-control" id="supplier" name="supplier" readonly> --}}
                         </div>
 
-                        <div class="col-md-6 mb-2">
+                        <div class="col-md-4 mb-2">
                             <label for="supplierPrice" class="form-label">Supplier Price</label>
                             <input type="text" class="form-control" id="supplierPrice" name="supplierPrice">
                         </div>
 
-                        <div class="col-md-6 mb-2">
+                        <div class="col-md-4 mb-2">
                             <label for="regularPrice" class="form-label">Regular Price</label>
                             <input type="text" class="form-control" id="regularPrice" name="regularPrice">
                         </div>
 
-                        <div class="col-md-12 mb-2">
-                            <label for="purchase_date" class="form-label">Purchase Date</label>
-                            <input type="date" class="form-control " id="purchase_date" name="purchase_date">
-                        </div>
+
                         <style>
                             .input-header {
                                 display: flex;

@@ -222,8 +222,21 @@
                                                         <option value="{{ $size->id }}" {{$selectedSize }}>{{ $size->size }}</option>
                                                     @endforeach
                                                 </select>
-                                                <input type="number" name="variant_price[]" class="form-control mr-2" value="{{ $variant->price }}" placeholder="Price" required>
-                                                <input type="number" name="variant_stock[]" class="form-control mr-2" value="{{ $variant->stock }}" placeholder="Stock" required>
+                                                <select name="variant_unit[]" class="form-control mr-2 unit-select" disabled>
+                                                    <option value="">Select Unit</option>
+                                                    @foreach($units as $unit)
+                                                        @php
+                                                            if ($variant->attributes->where('attribute.name','Unit')->isNotEmpty()) {
+                                                                $selectedUnit = $variant->attributes->firstWhere('attribute.name', 'Unit')->attribute->value == $unit->id ? 'selected' : '' ;
+                                                            }else {
+                                                                $selectedUnit ='';
+                                                            }
+                                                        @endphp
+                                                        <option value="{{ $unit->id }}" {{$selectedUnit }}>{{ $unit->unit }}</option>
+                                                    @endforeach
+                                                </select>
+                                                {{-- <input type="number" name="variant_price[]" class="form-control mr-2" value="{{ $variant->price }}" placeholder="Price" required>
+                                                <input type="number" name="variant_stock[]" class="form-control mr-2" value="{{ $variant->stock }}" placeholder="Stock" required> --}}
                                                 <input type="hidden" name="variant_ids[]" value="{{ $variant->id }}">
                                                 <button type="button" class="btn-custom btn-custom-danger removeVariant" ><i class="fas fa-times"></i></button>
                                             </div>
@@ -248,12 +261,12 @@
                                                 <input class="form-control" type="text" id="featurevalue-1" name="featurevalue[{{$index+1}}]" rows="1" value="{{$overview->overview_value}}" required>
                                             </div>
                                         </div>
-
-                                        @endforeach
-
                                         <div class="form-group">
                                             <input type="hidden" name="totinput" id="totfield" value="{{$index+1}}">
                                         </div>
+                                        @endforeach
+
+
                                     </div>
                                     <div id="morefield" >
                                         <div class="form-group">
@@ -313,11 +326,12 @@
                         </div>
 
                         <hr>
+                        @foreach ($products->product_extras as $extra)
                         <div class="mb-4">
                             <label class="form-label">Warranty Type</label>
-                            @foreach ($products->product_extras as $extra)
 
-                            @endforeach
+
+
                             <input type="text" value="{{$extra->warranty_type}}" placeholder="Warranty text.." class="form-control" name="warranty">
                         </div>
                         <div class="mb-4">
@@ -339,6 +353,7 @@
                                 <option value="Not Available" {{$extra->emi == 'Not Available'? 'selected':''}}>Not Available</option>
                             </select>
                         </div>
+                        @endforeach
 
                     </div>
                 </div>
@@ -401,8 +416,14 @@
                         <option value="{{$size->id}}">{{$size->size}}</option>
                     @endforeach
                 </select>
-                <input type="number" name="new_variant_price[]" class="form-control mr-2" placeholder="Price">
-                <input type="number" name="new_variant_stock[]" class="form-control mr-2" placeholder="Stock">
+                <select name="new_variant_unit[]" class="form-control mr-2 unit-select">
+                    <option value="">Select Unit</option>
+                    @foreach($units as $unit)
+                        <option value="{{$unit->id}}">{{$unit->unit}}</option>
+                    @endforeach
+                </select>
+                {{-- <input type="number" name="new_variant_price[]" class="form-control mr-2" placeholder="Price">
+                <input type="number" name="new_variant_stock[]" class="form-control mr-2" placeholder="Stock"> --}}
                 <button type="button" class="btn-custom btn-custom-danger removeVariant">
                     <i class="fas fa-times"></i>
                 </button>

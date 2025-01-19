@@ -371,8 +371,14 @@
                 <option value="{{$size->id}}">{{$size->size}}</option>
                 @endforeach
             </select>
-            <input type="number" name="variant_price[]" class="form-control mr-2" placeholder="Price">
-            <input type="number" name="variant_stock[]" class="form-control mr-2" placeholder="Stock">
+            <select name="variant_unit[]" class="form-control mr-2 size-select">
+                <option value="">Select Unit</option>
+                @foreach($units as $unit)
+                <option value="{{$unit->id}}">{{$unit->unit}}</option>
+                @endforeach
+            </select>
+            {{-- <input type="number" name="variant_price[]" class="form-control mr-2" placeholder="Price">
+            <input type="number" name="variant_stock[]" class="form-control mr-2" placeholder="Stock" value="0"> --}}
             <button type="button" class="btn-custom btn-custom-danger removeVariant">
                 <i class="fas fa-times"></i>
             </button>
