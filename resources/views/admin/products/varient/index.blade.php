@@ -91,10 +91,10 @@
     <div class="col-lg-6 col-md-6">
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between">
-                <h4>Storage</h4>
+                <h4>Size</h4>
                 @can('create variant')
                 <button type="button" class="btn btn-primary btn-sm rounded" data-bs-toggle="modal" data-bs-target="#sizeModal">
-                    Add Storage
+                    Add Size
                 </button>
                 @endcan
             </div>
@@ -103,8 +103,8 @@
                     <thead>
                         <tr>
                             <th>#SN</th>
-                            <th>Storage Name</th>
-                            <th>Storage code</th>
+                            <th>Size Name</th>
+                            <th>Size</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
