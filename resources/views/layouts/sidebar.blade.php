@@ -186,6 +186,21 @@
                     <a href="{{route('socialinfo.index')}}">
                         <span class="text">Social Info</span>
                     </a>
+                    <a href="{{route('privacy_policy.index')}}">
+                        <span class="text">Privacy Policy</span>
+                    </a>
+                    <a href="{{route('terms_condition.index')}}">
+                        <span class="text">Terms and Condition</span>
+                    </a>
+                    <a href="{{route('delivery_info.index')}}">
+                        <span class="text">Delivery Information</span>
+                    </a>
+                    <a href="{{route('faq.index')}}">
+                        <span class="text">Faqs</span>
+                    </a>
+                    <a href="{{route('cancel-return-policy.index')}}">
+                        <span class="text">Cancellation & Return Policy</span>
+                    </a>
 
                     <a href="#">
                         <span class="text">Shipping Method</span>

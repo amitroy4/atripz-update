@@ -14,6 +14,7 @@ use App\Models\Feature_category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Models\Aboutus;
+use App\Models\PrivacyPolicy;
 
 class HomeController extends Controller
 {
@@ -56,7 +57,9 @@ class HomeController extends Controller
         $categories = Category::with('children')->whereNull('parent_category')->get();
         $cat_feature = Feature_category::where('status', 'Active')->first();
 
+
         $sliders = Slider::all();
+
         $adsbanner = Ads::all();
         $campaign = Campaign::where('status','Published')->first();
 
@@ -74,7 +77,6 @@ class HomeController extends Controller
             'aboutus' => $aboutus,
         'categories' => $categories]);
     }
-
     /**
      * Store a newly created resource in storage.
      */
